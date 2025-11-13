@@ -5,14 +5,8 @@ using UnityEngine;
 public class BabusView : MonoBehaviour
 {
     private BabusStatus _status;
-
-    public void BabusInit(BabusStatus status)
+    public void Setup(BabusStatus status)
     {
         _status = status;
-    }
-
-    private void Update()
-    {
-
     }
 }

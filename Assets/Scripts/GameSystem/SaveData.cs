@@ -73,7 +73,7 @@ public class PartColorGenes
 }
 
 [Serializable]
-public class PetSaveData
+public class BabusSaveData
 {
     public bool IsLeft;
     public bool IsSick;
@@ -92,7 +92,7 @@ public class PetSaveData
     public float Health;
  
 
-    public PetSaveData()
+    public BabusSaveData()
     {
         IsLeft = false;
         IsSick = false;
@@ -118,7 +118,7 @@ public class IslandData
     public bool IsOpen;
     public bool IsLeft;
     public bool IsMarried;
-    public PetSaveData IslandPetSaveData;
+    public BabusSaveData IslandBabusSaveData;
     public float Affinity;
 
     public IslandData()
@@ -126,7 +126,7 @@ public class IslandData
         IsOpen = false;
         IsLeft = false;
         IsMarried = false;
-        IslandPetSaveData = new PetSaveData();
+        IslandBabusSaveData = new BabusSaveData();
         Affinity = 50f;
     }
 }
@@ -157,10 +157,10 @@ public class UserData
     public string UID;
     public Language CurLanguage;
     public string UserName;
-    public int MaxPetAmount;
-    public List<PetSaveData> HavePetList;
-    public List<PetRecordData> HadPetList;
-    public List<IslandPetRecordData> IslandPetList;
+    public int MaxBabusAmount;
+    public List<BabusSaveData> HaveBabusList;
+    public List<BabusRecordData> HadBabusList;
+    public List<IslandBabusRecordData> IslandBabusList;
     public IslandData Island;
     public UserItemData Items;
 
@@ -169,37 +169,32 @@ public class UserData
         UID = "";
         CurLanguage = Language.ENG;
         UserName = "";
-        MaxPetAmount = 1;
-        HavePetList = new List<PetSaveData>();
-        HadPetList = new List<PetRecordData>();
+        MaxBabusAmount = 1;
+        HaveBabusList = new List<BabusSaveData>();
+        HadBabusList = new List<BabusRecordData>();
         Island = new IslandData();
-        IslandPetList = new List<IslandPetRecordData>();
+        IslandBabusList = new List<IslandBabusRecordData>();
         Items = new UserItemData();
     }
 }
-    public class PetRecordData
-    {
-        public string PetId;
+    public class BabusRecordData
+{
+        public string ID;
         public string DisplayName;
         public GenesContainer Genes;
 
-        public PetRecordData(PetSaveData source)
+        public BabusRecordData(BabusSaveData source)
         {
-            PetId = source.ID;
+            ID = source.ID;
             DisplayName = source.Name;
             Genes = source.Genes;
         }
     }
-public class IslandPetRecordData
+public class IslandBabusRecordData
 {
     public GenesContainer Genes;
 
-    public IslandPetRecordData()
-    {
-        Genes = new GenesContainer();
-    }
-
-    public IslandPetRecordData(PetSaveData source)
+    public IslandBabusRecordData(BabusSaveData source)
     {
         Genes = source.Genes;
     }

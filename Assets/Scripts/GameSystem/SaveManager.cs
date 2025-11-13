@@ -2,11 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveManager : Singleton<SaveManager>
+public static class SaveManager
 {
+    private const string Key = "UserData";
 
-    private void OnApplicationQuit()
+    public static UserData Load()
     {
-        Debug.Log("세이브 완료");
+        var json = PlayerPrefs.GetString(Key, ""); // ""는 뭐임 ?
+        if(string.IsNullOrEmpty(json))
+        {
+            return null;
+        }
+
+        return JsonUtility.FromJson<UserData>(json);
+    }
+    public static void Save(UserData data)
+    {
+        string json = JsonUtility.ToJson(data);
+        PlayerPrefs.SetString(Key, json);
+        PlayerPrefs.Save();
     }
 }

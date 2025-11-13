@@ -4,31 +4,46 @@ using UnityEngine;
 
 public class BabusManager : MonoBehaviour
 {
-    private List<BabusStatus> _babuses = new List<BabusStatus>();
-    public List<BabusStatus> babuses => _babuses;
+    [SerializeField] private GameObject _babusPrefab;
+
+    private List<BabusStatus> _babuses;
+    private List<BabusView> _views = new List<BabusView>();
 
     private float _timer;
 
-    public void AddBabus(int id, BabusConfigSO config) //게임매니저가 호출
+    private void Start()
     {
-        var status = new BabusStatus(id, config);
-        _babuses.Add(status);
+        _babuses = Manager.Game.Babuses;
+        SpawnAll();
     }
-    public void TickAll(int sec)
+
+    private void SpawnAll()
     {
-        for (int i = 0; i < _babuses.Count; i++)
+        foreach (var status in _babuses)
         {
-            _babuses[i].Tick(sec);
+            var obj = Instantiate(_babusPrefab, transform);
+            var view = obj.GetComponent<BabusView>();
+            view.Setup(status);
+            _views.Add(view);
         }
     }
+
     private void Update()
     {
         _timer += Time.deltaTime;
 
-        if(_timer >= 1f)
+        if (_timer >= 1f)
         {
             _timer -= 1f;
             TickAll(1);
+        }
+    }
+
+    private void TickAll(int sec)
+    {
+        for (int i = 0; i < _babuses.Count; i++)
+        {
+            _babuses[i].Tick(sec);
         }
     }
 }

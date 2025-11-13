@@ -11,6 +11,7 @@ public class BabusStatus
     public float Cleaniness { get; private set; }
     public float Happiness { get; private set; }
     public bool IsSick { get; private set; }
+    public bool IsLeft {  get; private set; }
 
     public Growth growth { get; private set; }
 
@@ -79,5 +80,16 @@ public class BabusStatus
         Health = Mathf.Clamp(Health, 0, 100);
         Cleaniness = Mathf.Clamp(Cleaniness, 0, 100);
         Happiness = Mathf.Clamp(Happiness, 0, 100);
+    }
+    public void SetValues(float hunger, float health, float cleanliness, float happiness)
+    {
+        Hunger = hunger;
+        Health = health;
+        Cleaniness = cleanliness;
+        Happiness = happiness;
+    }
+    public void SetFlag(bool isSick)
+    {
+        IsSick = isSick;
     }
 }
